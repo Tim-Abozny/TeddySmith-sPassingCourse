@@ -18,6 +18,14 @@ namespace api.Repository
             _dbContext = context;
         }
 
+        public async Task<Comment> CreateAsync(Comment comment)
+        {
+            await _dbContext.Comments.AddAsync(comment);
+            await _dbContext.SaveChangesAsync();
+
+            return comment;
+        }
+
         public async Task<List<Comment>> GetAllAsync()
         {
             return await _dbContext.Comments.ToListAsync();
